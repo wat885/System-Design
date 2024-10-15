@@ -1,0 +1,33 @@
+class User {
+  constructor(username, password) {
+    this.username = username;
+    let _password = password;
+    let _log = [];
+
+    this.login = function (username, password) {
+
+      if (username !== this.username) throw new Error("Invalid credentials");
+      if (password !== _password) throw new Error("Invalid credentials");
+      console.log(`${username} logged in`);
+    };
+
+    this.logout = function () {
+      console.log(`${this.username} logged out`);
+      _log.push(`${new Date().toISOString()} - Logged out`);
+    };
+
+    this.getProfile = function () {
+      return {
+        username: this.username,
+        log: _log,
+      };
+    };
+  }
+}
+
+// // Usage example
+const user1 = new User("user11", "1111");
+
+user1.login("user11", "1111");
+console.log(user1.getProfile());
+user1.logout();
